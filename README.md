@@ -20,10 +20,11 @@ Once you have added acts_as_subscriber, the subscriber will accept nested attrib
 ```
 = simple_form_for @subscriber do |f|
   = f.simple_fields_for :subscription do |sf|
+    = sf.association :plan, as: :hidden
     = render "subscription_fields", f: sf
 ```
 
-Remember to build a subscription model for the subscriber in the #new action of your controller and add `subscription_attributes: [:id, :stripe_card_token]` to permitted params.
+Remember to build a subscription model for the subscriber in the #new action of your controller and add `subscription_attributes: [:plan_id, :stripe_card_token]` to permitted params. You'll also need a way to set the plan id. You can set it in the controller based on the route and add a hidden field like in the example above, or add a select field before the subscription fields.
 
 ### Stripe JS
 You also need to add the js necessary for Stripe to work. In your application.js, add `//= require flyover_subscriptions` and inside your `<head>` tag, add `<%= render 'stripe_js' %>`. Then add `class="stripe-form"` to any forms that have the subscription fields.
