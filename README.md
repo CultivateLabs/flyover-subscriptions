@@ -20,7 +20,7 @@ Once you have added acts_as_subscriber, the subscriber will accept nested attrib
 ```
 = simple_form_for @subscriber do |f|
   = f.simple_fields_for :subscription do |sf|
-    = render "subscriber_fields", f: sf
+    = render "subscription_fields", f: sf
 ```
 
 Remember to build a subscription model for the subscriber in the #new action of your controller and add `subscription_attributes: [:id, :stripe_card_token]` to permitted params.
