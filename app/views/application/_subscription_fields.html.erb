@@ -1,0 +1,29 @@
+<%= f.hidden_field :stripe_card_token, id: "stripe-card-token" %>
+
+<% if f.object.stripe_card_token.present? %>
+  <div class="alert alert-success">
+    Credit card has been provided.
+  </div>
+<% else %>
+  <div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+  </div>
+  <div class="form-group">
+    <%= label_tag :card_number, "Credit Card Number" %>
+    <%= text_field_tag :card_number, nil, name: nil, class: 'form-control' %>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag :card_code, "Security Code on Card (CVC)" %>
+        <%= text_field_tag :card_code, nil, name: nil, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag :card_expiration, "Card Expiration (MM/YY)" %>
+        <%= text_field_tag :card_expiration, nil, name: nil, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+<% end %>

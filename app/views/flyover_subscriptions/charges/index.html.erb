@@ -1,0 +1,14 @@
+<div class="container">
+  <h3>Charges</h3>
+  <% if @charges.data.length > 0 %>
+    <ul>
+      <% @charges.data.each do |charge| %>
+        <li><%= number_to_currency charge["amount"] / 100 %> on <%= Time.at(charge["created"]).strftime("%m/%d/%Y") %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="well">
+      <p>No Charges</p>
+    </div>
+  <% end %>
+</div>

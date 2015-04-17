@@ -1,0 +1,6 @@
+<h3>New Subscription</h3>
+<%= form_for [flyover_subscriptions, @subscription], html: { class: "stripe-form" } do |f| %>
+  <%= f.hidden_field :plan_id %>
+  <%= render 'subscription_fields', f: f %>
+  <%= f.submit %>
+<% end %>
