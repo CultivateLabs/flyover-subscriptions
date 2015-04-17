@@ -26,7 +26,7 @@ Once you have added acts_as_subscriber, the subscriber will accept nested attrib
 Remember to build a subscription model for the subscriber in the #new action of your controller and add `subscription_attributes: [:id, :stripe_card_token]` to permitted params.
 
 ### Stripe JS
-You also need to add the js necessary for Stripe to work. In your application.js, add `//= require flyover_subscriptions` and inside your <head> tag, add `<%= render 'stripe_js' %>`
+You also need to add the js necessary for Stripe to work. In your application.js, add `//= require flyover_subscriptions` and inside your `<head>` tag, add `<%= render 'stripe_js' %>`
 
 ## Configuration Settings
 Customize the following settings in an initializer:
