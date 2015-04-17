@@ -4,6 +4,7 @@ module FlyoverSubscriptions
       include FlyoverSubscriptions::ActsAsSubscriber::InstanceMethods
       has_one :subscription, as: :subscriber, class_name: "FlyoverSubscriptions::Subscription", dependent: :destroy
       before_destroy :cancel_subscription
+      accepts_nested_attributes_for :subscription
     end
 
     module InstanceMethods
