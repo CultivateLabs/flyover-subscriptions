@@ -20,8 +20,8 @@ module FlyoverSubscriptions
     end
 
     def customer
-      Stripe.api_key = ENV["STRIPE_SECRET"]
-      @customer ||= self.stripe_customer_token.present? ? Stripe::Customer.retrieve(self.stripe_customer_token) : Stripe::Customer.create(description: self.subscriber.email, email: self.subscriber.email, plan: self.plan.stripe_id, card: self.stripe_card_token)
+      ::Stripe.api_key = ENV["STRIPE_SECRET"]
+      @customer ||= self.stripe_customer_token.present? ? ::Stripe::Customer.retrieve(self.stripe_customer_token) : ::Stripe::Customer.create(description: self.subscriber.email, email: self.subscriber.email, plan: self.plan.stripe_id, card: self.stripe_card_token)
     end
 
   private
@@ -30,7 +30,7 @@ module FlyoverSubscriptions
         self.stripe_customer_token = customer.id
         self.last_four = customer.sources.retrieve(customer.default_source).last4
       end
-    rescue Stripe::InvalidRequestError => e
+    rescue ::Stripe::InvalidRequestError => e
       logger.error "Stripe error while creating subscription: #{e.message}"
       errors.add :base, "There was a problem with your credit card."
       false
@@ -48,7 +48,7 @@ module FlyoverSubscriptions
         cancel_stripe_subscription
         self.last_four = nil
       end
-    rescue Stripe::InvalidRequestError => e
+    rescue ::Stripe::InvalidRequestError => e
       logger.error "Stripe error while updating plan: #{e.message}"
       errors.add :base, "There was a problem updating your subscription plan."
       false
