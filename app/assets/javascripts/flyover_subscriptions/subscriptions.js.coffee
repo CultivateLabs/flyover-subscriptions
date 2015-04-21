@@ -34,5 +34,5 @@ subscription =
       $('#stripe-card-token').val(response.id)
       $('.stripe-form')[0].submit()
     else
-      $('#stripe_error').text(response.error.message).show()
+      $('#stripe_error').html("<div class='alert alert-danger'>#{response.error.message}</div>").show()
       $('.stripe-form input[type=submit]').attr('disabled', false)

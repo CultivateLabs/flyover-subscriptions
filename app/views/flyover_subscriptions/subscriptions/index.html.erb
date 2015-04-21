@@ -4,7 +4,7 @@
       <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
         <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
         <%= render 'subscription_fields', f: f %>
-        <%= f.submit %>
+        <%= f.submit "Subscribe", class: "btn btn-primary" %>
       <% end %>
     <% else %>
       <h3>Update Card</h3>
@@ -18,7 +18,7 @@
       <div id="update-card" class="collapse">
         <%= form_for @subscription, html: { class: "stripe-form" } do |f| %>
           <%= render 'subscription_fields', f: f %>
-          <%= f.submit %>
+          <%= f.submit "Update Card", class: "btn btn-primary" %>
         <% end %>
       </div>
       
@@ -26,16 +26,16 @@
         <h3>Change Plan</h3>
         <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
           <%= f.association :plan %>
-          <%= f.submit %>
+          <%= f.submit "Update Plan", class: "btn btn-primary" %>
         <% end %>
       <% end %>
       
 
       <h3>List Charges</h3>
       <% if @charges.data.length > 0 %>
-        <ul>
+        <ul class="list-group">
           <% @charges.data.each do |charge| %>
-            <li><%= number_to_currency charge["amount"] / 100 %> on <%= Time.at(charge["created"]).strftime("%m/%d/%Y") %></li>
+            <li class="list-group-item"><%= number_to_currency charge["amount"] / 100 %> on <%= Time.at(charge["created"]).strftime("%m/%d/%Y") %></li>
           <% end %>
         </ul>
       <% else %>
