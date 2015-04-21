@@ -31,11 +31,19 @@ require 'stripe_mock'
 #
 Dir[FlyoverSubscriptions::Engine.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+Capybara.register_driver :poltergeist_sp do |app|
+  Capybara::Poltergeist::Driver.new(app, phantomjs_logger: WarningSuppressor)
+end
+Capybara.javascript_driver = :poltergeist_sp
+Capybara.default_wait_time = 10
+
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

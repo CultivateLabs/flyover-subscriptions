@@ -20,16 +20,9 @@ module FlyoverSubscriptions
     it "cancels a subscription by removing the plan" do
       subscription = create(:subscription)
       expect(@customer).to receive(:cancel_subscription).and_return(true)
-      subscription.plan = nil
-      subscription.save
-      expect(subscription.plan).to be_nil
-    end
-
-    it "cancels a subscription by removing the plan" do
-      subscription = create(:subscription)
-      subscription.stripe_card_token = "token"
-      expect(@customer).to receive(:save).and_return(true)
-      subscription.save
+      expect{
+        subscription.destroy
+      }.to change(FlyoverSubscriptions::Subscription, :count).by(-1)
     end
   end
 end

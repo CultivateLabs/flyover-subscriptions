@@ -1,4 +1,3 @@
 FlyoverSubscriptions::Engine.routes.draw do
-  resources :subscriptions
-  resources :charges, only: :index
+  resources :subscriptions, only: [:index, :create, :update, :destroy]
 end

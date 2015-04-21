@@ -9,6 +9,7 @@ module FlyoverSubscriptions
 
     before_create :create_stripe_subscription
     before_update :update_stripe_plan
+    before_destroy :cancel_stripe_subscription
 
     def stripe_card_token=(token)
       attribute_will_change!(:stripe_customer_token)
@@ -44,9 +45,6 @@ module FlyoverSubscriptions
       elsif self.plan.present?
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
         self.last_four = customer.sources.retrieve(customer.default_source).last4
-      else
-        cancel_stripe_subscription
-        self.last_four = nil
       end
     rescue ::Stripe::InvalidRequestError => e
       logger.error "Stripe error while updating plan: #{e.message}"

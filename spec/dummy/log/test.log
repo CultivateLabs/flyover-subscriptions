@@ -16742,3 +16742,1416 @@ Started GET "/assets/stripe_debug_js_v2.js" for 127.0.0.1 at 2015-03-19 09:30:40
   [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
   [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
   [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (42.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (4.2ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (6.3ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (1.0ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:42:12 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.2ms)
+  Rendered subscriptions/new.html.erb within layouts/application (35.4ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (92.4ms)
+Completed 200 OK in 762ms (Views: 749.3ms | ActiveRecord: 5.7ms)
+  [1m[35m (6.5ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (23.5ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:42:13.093368"], ["updated_at", "2015-04-21 20:42:13.093368"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.7ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:42:13.130936"], ["updated_at", "2015-04-21 20:42:13.130936"]]
+  [1m[35mSQL (2.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 414], ["subscriber_id", 357], ["created_at", "2015-04-21 20:42:13.134531"], ["updated_at", "2015-04-21 20:42:13.134531"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.4ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 357], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:42:13.196153"], ["updated_at", "2015-04-21 20:42:13.196153"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:42:13.199330"], ["updated_at", "2015-04-21 20:42:13.199330"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 358], ["subscriber_type", "Widget"], ["plan_id", 415], ["created_at", "2015-04-21 20:42:13.203740"], ["updated_at", "2015-04-21 20:42:13.203740"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:42:13.213633"], ["updated_at", "2015-04-21 20:42:13.213633"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:42:13.216694"], ["updated_at", "2015-04-21 20:42:13.216694"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 359], ["subscriber_type", "Widget"], ["plan_id", 416], ["created_at", "2015-04-21 20:42:13.219079"], ["updated_at", "2015-04-21 20:42:13.219079"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:42:13.221949"], ["updated_at", "2015-04-21 20:42:13.221949"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 417], ["updated_at", "2015-04-21 20:42:13.225469"], ["id", 234]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:42:13.236935"], ["updated_at", "2015-04-21 20:42:13.236935"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:42:13.241030"], ["updated_at", "2015-04-21 20:42:13.241030"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 360], ["subscriber_type", "Widget"], ["plan_id", 418], ["created_at", "2015-04-21 20:42:13.243891"], ["updated_at", "2015-04-21 20:42:13.243891"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", nil], ["updated_at", "2015-04-21 20:42:13.246606"], ["id", 235]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:42:13.251707"], ["updated_at", "2015-04-21 20:42:13.251707"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:42:13.254991"], ["updated_at", "2015-04-21 20:42:13.254991"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 361], ["subscriber_type", "Widget"], ["plan_id", 419], ["created_at", "2015-04-21 20:42:13.258795"], ["updated_at", "2015-04-21 20:42:13.258795"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "stripe_customer_token" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["stripe_customer_token", "token_123"], ["updated_at", "2015-04-21 20:42:13.262026"], ["id", 236]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.9ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (5.1ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:44:46 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.2ms)
+  Rendered subscriptions/new.html.erb within layouts/application (33.4ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.6ms)
+Completed 200 OK in 242ms (Views: 230.4ms | ActiveRecord: 4.9ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (26.5ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:44:46.523969"], ["updated_at", "2015-04-21 20:44:46.523969"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:44:46.557172"], ["updated_at", "2015-04-21 20:44:46.557172"]]
+  [1m[35mSQL (1.6ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 420], ["subscriber_id", 362], ["created_at", "2015-04-21 20:44:46.560225"], ["updated_at", "2015-04-21 20:44:46.560225"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (18.6ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 362], ["subscriber_type", "Widget"]]
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:44:46.635000"], ["updated_at", "2015-04-21 20:44:46.635000"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:44:46.638240"], ["updated_at", "2015-04-21 20:44:46.638240"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 363], ["subscriber_type", "Widget"], ["plan_id", 421], ["created_at", "2015-04-21 20:44:46.642036"], ["updated_at", "2015-04-21 20:44:46.642036"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:44:46.650281"], ["updated_at", "2015-04-21 20:44:46.650281"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:44:46.653884"], ["updated_at", "2015-04-21 20:44:46.653884"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 364], ["subscriber_type", "Widget"], ["plan_id", 422], ["created_at", "2015-04-21 20:44:46.656430"], ["updated_at", "2015-04-21 20:44:46.656430"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:44:46.659729"], ["updated_at", "2015-04-21 20:44:46.659729"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (6.6ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 423], ["updated_at", "2015-04-21 20:44:46.662210"], ["id", 239]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:44:46.679587"], ["updated_at", "2015-04-21 20:44:46.679587"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:44:46.682576"], ["updated_at", "2015-04-21 20:44:46.682576"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 365], ["subscriber_type", "Widget"], ["plan_id", 424], ["created_at", "2015-04-21 20:44:46.684923"], ["updated_at", "2015-04-21 20:44:46.684923"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1[0m  [["id", 240]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mFlyoverSubscriptions::Subscription Load (0.3ms)[0m  [1mSELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1 LIMIT 1[0m  [["id", 240]]
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:44:46.695616"], ["updated_at", "2015-04-21 20:44:46.695616"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:44:46.698471"], ["updated_at", "2015-04-21 20:44:46.698471"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 366], ["subscriber_type", "Widget"], ["plan_id", 425], ["created_at", "2015-04-21 20:44:46.700819"], ["updated_at", "2015-04-21 20:44:46.700819"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "flyover_subscriptions_subscriptions" SET "stripe_customer_token" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3  [["stripe_customer_token", "token_123"], ["updated_at", "2015-04-21 20:44:46.703674"], ["id", 241]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (5.0ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:45:30 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.1ms)
+  Rendered subscriptions/new.html.erb within layouts/application (34.6ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (6.5ms)
+Completed 200 OK in 241ms (Views: 221.8ms | ActiveRecord: 9.6ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (19.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:30.647518"], ["updated_at", "2015-04-21 20:45:30.647518"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:45:30.675174"], ["updated_at", "2015-04-21 20:45:30.675174"]]
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 426], ["subscriber_id", 367], ["created_at", "2015-04-21 20:45:30.678208"], ["updated_at", "2015-04-21 20:45:30.678208"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.3ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 367], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:45:30.733397"], ["updated_at", "2015-04-21 20:45:30.733397"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:30.737413"], ["updated_at", "2015-04-21 20:45:30.737413"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 368], ["subscriber_type", "Widget"], ["plan_id", 427], ["created_at", "2015-04-21 20:45:30.740672"], ["updated_at", "2015-04-21 20:45:30.740672"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:45:30.749744"], ["updated_at", "2015-04-21 20:45:30.749744"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:30.752623"], ["updated_at", "2015-04-21 20:45:30.752623"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 369], ["subscriber_type", "Widget"], ["plan_id", 428], ["created_at", "2015-04-21 20:45:30.755372"], ["updated_at", "2015-04-21 20:45:30.755372"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:30.758350"], ["updated_at", "2015-04-21 20:45:30.758350"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 429], ["updated_at", "2015-04-21 20:45:30.760710"], ["id", 244]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:45:30.772260"], ["updated_at", "2015-04-21 20:45:30.772260"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:30.775048"], ["updated_at", "2015-04-21 20:45:30.775048"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 370], ["subscriber_type", "Widget"], ["plan_id", 430], ["created_at", "2015-04-21 20:45:30.777791"], ["updated_at", "2015-04-21 20:45:30.777791"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1[0m  [["id", 245]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:45:30.786050"], ["updated_at", "2015-04-21 20:45:30.786050"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:30.789102"], ["updated_at", "2015-04-21 20:45:30.789102"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 371], ["subscriber_type", "Widget"], ["plan_id", 431], ["created_at", "2015-04-21 20:45:30.791439"], ["updated_at", "2015-04-21 20:45:30.791439"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "stripe_customer_token" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["stripe_customer_token", "token_123"], ["updated_at", "2015-04-21 20:45:30.795257"], ["id", 246]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.0ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (4.6ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.4ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.4ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:45:58 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.1ms)
+  Rendered subscriptions/new.html.erb within layouts/application (31.6ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.9ms)
+Completed 200 OK in 233ms (Views: 207.3ms | ActiveRecord: 16.8ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (12.0ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:58.305351"], ["updated_at", "2015-04-21 20:45:58.305351"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (7.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:45:58.325761"], ["updated_at", "2015-04-21 20:45:58.325761"]]
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 432], ["subscriber_id", 372], ["created_at", "2015-04-21 20:45:58.334942"], ["updated_at", "2015-04-21 20:45:58.334942"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.3ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 372], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:45:58.388081"], ["updated_at", "2015-04-21 20:45:58.388081"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:58.391787"], ["updated_at", "2015-04-21 20:45:58.391787"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 373], ["subscriber_type", "Widget"], ["plan_id", 433], ["created_at", "2015-04-21 20:45:58.394214"], ["updated_at", "2015-04-21 20:45:58.394214"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:45:58.402443"], ["updated_at", "2015-04-21 20:45:58.402443"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:58.405488"], ["updated_at", "2015-04-21 20:45:58.405488"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 374], ["subscriber_type", "Widget"], ["plan_id", 434], ["created_at", "2015-04-21 20:45:58.407867"], ["updated_at", "2015-04-21 20:45:58.407867"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:58.410705"], ["updated_at", "2015-04-21 20:45:58.410705"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 435], ["updated_at", "2015-04-21 20:45:58.413940"], ["id", 249]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:45:58.424871"], ["updated_at", "2015-04-21 20:45:58.424871"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:58.427879"], ["updated_at", "2015-04-21 20:45:58.427879"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 375], ["subscriber_type", "Widget"], ["plan_id", 436], ["created_at", "2015-04-21 20:45:58.430661"], ["updated_at", "2015-04-21 20:45:58.430661"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1[0m  [["id", 250]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mFlyoverSubscriptions::Subscription Load (0.2ms)[0m  [1mSELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1 LIMIT 1[0m  [["id", 250]]
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:45:58.438627"], ["updated_at", "2015-04-21 20:45:58.438627"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:45:58.442125"], ["updated_at", "2015-04-21 20:45:58.442125"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 376], ["subscriber_type", "Widget"], ["plan_id", 437], ["created_at", "2015-04-21 20:45:58.444468"], ["updated_at", "2015-04-21 20:45:58.444468"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "flyover_subscriptions_subscriptions" SET "stripe_customer_token" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3  [["stripe_customer_token", "token_123"], ["updated_at", "2015-04-21 20:45:58.447465"], ["id", 251]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (5.1ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:46:41 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.8ms)
+  Rendered subscriptions/new.html.erb within layouts/application (37.2ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.5ms)
+Completed 200 OK in 248ms (Views: 226.9ms | ActiveRecord: 14.3ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (19.1ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:46:42.035531"], ["updated_at", "2015-04-21 20:46:42.035531"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:46:42.062430"], ["updated_at", "2015-04-21 20:46:42.062430"]]
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 438], ["subscriber_id", 377], ["created_at", "2015-04-21 20:46:42.065625"], ["updated_at", "2015-04-21 20:46:42.065625"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.4ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 377], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:46:42.119293"], ["updated_at", "2015-04-21 20:46:42.119293"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:46:42.123036"], ["updated_at", "2015-04-21 20:46:42.123036"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 378], ["subscriber_type", "Widget"], ["plan_id", 439], ["created_at", "2015-04-21 20:46:42.125699"], ["updated_at", "2015-04-21 20:46:42.125699"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:46:42.134515"], ["updated_at", "2015-04-21 20:46:42.134515"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:46:42.137487"], ["updated_at", "2015-04-21 20:46:42.137487"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 379], ["subscriber_type", "Widget"], ["plan_id", 440], ["created_at", "2015-04-21 20:46:42.139965"], ["updated_at", "2015-04-21 20:46:42.139965"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:46:42.142884"], ["updated_at", "2015-04-21 20:46:42.142884"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 441], ["updated_at", "2015-04-21 20:46:42.145614"], ["id", 254]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:46:42.156532"], ["updated_at", "2015-04-21 20:46:42.156532"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:46:42.160124"], ["updated_at", "2015-04-21 20:46:42.160124"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 380], ["subscriber_type", "Widget"], ["plan_id", 442], ["created_at", "2015-04-21 20:46:42.162807"], ["updated_at", "2015-04-21 20:46:42.162807"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1  [["id", 255]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:46:42.176686"], ["updated_at", "2015-04-21 20:46:42.176686"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:46:42.179551"], ["updated_at", "2015-04-21 20:46:42.179551"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 381], ["subscriber_type", "Widget"], ["plan_id", 443], ["created_at", "2015-04-21 20:46:42.182481"], ["updated_at", "2015-04-21 20:46:42.182481"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "stripe_customer_token" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["stripe_customer_token", "token_123"], ["updated_at", "2015-04-21 20:46:42.186224"], ["id", 256]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (3.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (5.3ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.4ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:47:21 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.1ms)
+  Rendered subscriptions/new.html.erb within layouts/application (48.2ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (6.2ms)
+Completed 200 OK in 271ms (Views: 259.2ms | ActiveRecord: 4.1ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (8.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:47:21.483568"], ["updated_at", "2015-04-21 20:47:21.483568"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (13.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:47:21.499332"], ["updated_at", "2015-04-21 20:47:21.499332"]]
+  [1m[35mSQL (1.9ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 444], ["subscriber_id", 382], ["created_at", "2015-04-21 20:47:21.515186"], ["updated_at", "2015-04-21 20:47:21.515186"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.3ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 382], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:47:21.569693"], ["updated_at", "2015-04-21 20:47:21.569693"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:47:21.573178"], ["updated_at", "2015-04-21 20:47:21.573178"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 383], ["subscriber_type", "Widget"], ["plan_id", 445], ["created_at", "2015-04-21 20:47:21.576778"], ["updated_at", "2015-04-21 20:47:21.576778"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:47:21.585183"], ["updated_at", "2015-04-21 20:47:21.585183"]]
+  [1m[35m (0.4ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:47:21.588916"], ["updated_at", "2015-04-21 20:47:21.588916"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 384], ["subscriber_type", "Widget"], ["plan_id", 446], ["created_at", "2015-04-21 20:47:21.591807"], ["updated_at", "2015-04-21 20:47:21.591807"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:47:21.594935"], ["updated_at", "2015-04-21 20:47:21.594935"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 447], ["updated_at", "2015-04-21 20:47:21.597472"], ["id", 259]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:47:21.609896"], ["updated_at", "2015-04-21 20:47:21.609896"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:47:21.613766"], ["updated_at", "2015-04-21 20:47:21.613766"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.5ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 385], ["subscriber_type", "Widget"], ["plan_id", 448], ["created_at", "2015-04-21 20:47:21.617459"], ["updated_at", "2015-04-21 20:47:21.617459"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (6.0ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1  [["id", 260]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (3.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.9ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (5.3ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:49:40 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.1ms)
+  Rendered subscriptions/new.html.erb within layouts/application (35.2ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.1ms)
+Completed 200 OK in 236ms (Views: 225.7ms | ActiveRecord: 3.8ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (12.8ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:49:40.408603"], ["updated_at", "2015-04-21 20:49:40.408603"]]
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (7.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:49:40.430537"], ["updated_at", "2015-04-21 20:49:40.430537"]]
+  [1m[35mSQL (1.7ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 449], ["subscriber_id", 386], ["created_at", "2015-04-21 20:49:40.439682"], ["updated_at", "2015-04-21 20:49:40.439682"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.3ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 386], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:49:40.493256"], ["updated_at", "2015-04-21 20:49:40.493256"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:49:40.496533"], ["updated_at", "2015-04-21 20:49:40.496533"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 387], ["subscriber_type", "Widget"], ["plan_id", 450], ["created_at", "2015-04-21 20:49:40.498916"], ["updated_at", "2015-04-21 20:49:40.498916"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:49:40.506815"], ["updated_at", "2015-04-21 20:49:40.506815"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:49:40.510668"], ["updated_at", "2015-04-21 20:49:40.510668"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 388], ["subscriber_type", "Widget"], ["plan_id", 451], ["created_at", "2015-04-21 20:49:40.513403"], ["updated_at", "2015-04-21 20:49:40.513403"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:49:40.516449"], ["updated_at", "2015-04-21 20:49:40.516449"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 452], ["updated_at", "2015-04-21 20:49:40.518922"], ["id", 263]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:49:40.529791"], ["updated_at", "2015-04-21 20:49:40.529791"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:49:40.532632"], ["updated_at", "2015-04-21 20:49:40.532632"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 389], ["subscriber_type", "Widget"], ["plan_id", 453], ["created_at", "2015-04-21 20:49:40.535066"], ["updated_at", "2015-04-21 20:49:40.535066"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1  [["id", 264]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (23.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (5.2ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.3ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.4ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:50:23 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.2ms)
+  Rendered subscriptions/new.html.erb within layouts/application (35.1ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.0ms)
+Completed 200 OK in 243ms (Views: 224.3ms | ActiveRecord: 10.3ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (18.1ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:23.339937"], ["updated_at", "2015-04-21 20:50:23.339937"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:50:23.367842"], ["updated_at", "2015-04-21 20:50:23.367842"]]
+  [1m[35mSQL (2.1ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 454], ["subscriber_id", 390], ["created_at", "2015-04-21 20:50:23.370869"], ["updated_at", "2015-04-21 20:50:23.370869"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.5ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 390], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (2.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:50:23.463141"], ["updated_at", "2015-04-21 20:50:23.463141"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:23.468522"], ["updated_at", "2015-04-21 20:50:23.468522"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 391], ["subscriber_type", "Widget"], ["plan_id", 455], ["created_at", "2015-04-21 20:50:23.472452"], ["updated_at", "2015-04-21 20:50:23.472452"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:50:23.485209"], ["updated_at", "2015-04-21 20:50:23.485209"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:23.489615"], ["updated_at", "2015-04-21 20:50:23.489615"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 392], ["subscriber_type", "Widget"], ["plan_id", 456], ["created_at", "2015-04-21 20:50:23.494800"], ["updated_at", "2015-04-21 20:50:23.494800"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:23.501343"], ["updated_at", "2015-04-21 20:50:23.501343"]]
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 457], ["updated_at", "2015-04-21 20:50:23.509140"], ["id", 267]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:50:23.531361"], ["updated_at", "2015-04-21 20:50:23.531361"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:23.536615"], ["updated_at", "2015-04-21 20:50:23.536615"]]
+  [1m[35m (0.3ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 393], ["subscriber_type", "Widget"], ["plan_id", 458], ["created_at", "2015-04-21 20:50:23.541242"], ["updated_at", "2015-04-21 20:50:23.541242"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1  [["id", 268]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (8.4ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:50:45 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.5ms)
+  Rendered subscriptions/new.html.erb within layouts/application (34.6ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.6ms)
+Completed 200 OK in 253ms (Views: 233.5ms | ActiveRecord: 12.2ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (24.1ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:46.071360"], ["updated_at", "2015-04-21 20:50:46.071360"]]
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:50:46.104694"], ["updated_at", "2015-04-21 20:50:46.104694"]]
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 459], ["subscriber_id", 394], ["created_at", "2015-04-21 20:50:46.107707"], ["updated_at", "2015-04-21 20:50:46.107707"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.4ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 394], ["subscriber_type", "Widget"]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.8ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:50:46.163478"], ["updated_at", "2015-04-21 20:50:46.163478"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:46.167256"], ["updated_at", "2015-04-21 20:50:46.167256"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 395], ["subscriber_type", "Widget"], ["plan_id", 460], ["created_at", "2015-04-21 20:50:46.170727"], ["updated_at", "2015-04-21 20:50:46.170727"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:50:46.178420"], ["updated_at", "2015-04-21 20:50:46.178420"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:46.181344"], ["updated_at", "2015-04-21 20:50:46.181344"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 396], ["subscriber_type", "Widget"], ["plan_id", 461], ["created_at", "2015-04-21 20:50:46.184919"], ["updated_at", "2015-04-21 20:50:46.184919"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:46.188129"], ["updated_at", "2015-04-21 20:50:46.188129"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 462], ["updated_at", "2015-04-21 20:50:46.190531"], ["id", 271]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:50:46.201398"], ["updated_at", "2015-04-21 20:50:46.201398"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:50:46.205119"], ["updated_at", "2015-04-21 20:50:46.205119"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 397], ["subscriber_type", "Widget"], ["plan_id", 463], ["created_at", "2015-04-21 20:50:46.207512"], ["updated_at", "2015-04-21 20:50:46.207512"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1  [["id", 272]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (12.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (4.2ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL
+  [1m[36m (7.1ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'flyover_subscriptions_test'[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.3ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (6.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:53:07 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (1.2ms)
+  Rendered subscriptions/new.html.erb within layouts/application (37.8ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (8.7ms)
+Completed 200 OK in 272ms (Views: 261.4ms | ActiveRecord: 4.1ms)
+  [1m[35m (0.5ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.6ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/subscriptions/new" for 127.0.0.1 at 2015-04-21 15:53:12 -0500
+Processing by SubscriptionsController#new as HTML
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_subscription_fields.html.erb (0.5ms)
+  Rendered subscriptions/new.html.erb within layouts/application (8.7ms)
+  Rendered /Users/earlynovrock/Web/subscriptions/app/views/application/_stripe_js.html.erb (1.6ms)
+Completed 200 OK in 13ms (Views: 12.6ms | ActiveRecord: 0.0ms)
+Started GET "/assets/application.css" for 127.0.0.1 at 2015-04-21 15:53:12 -0500
+Started GET "/assets/application.js" for 127.0.0.1 at 2015-04-21 15:53:12 -0500
+Started GET "/assets/stripe_debug_js_v2.js" for 127.0.0.1 at 2015-04-21 15:53:12 -0500
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "widgets" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" DISABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "widgets";
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "flyover_subscriptions_plans";[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions";
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "widgets" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_plans" ENABLE TRIGGER ALL;ALTER TABLE "flyover_subscriptions_subscriptions" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (24.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:53:12.882493"], ["updated_at", "2015-04-21 20:53:12.882493"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (1.7ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:53:12.941280"], ["updated_at", "2015-04-21 20:53:12.941280"]]
+  [1m[35mSQL (2.4ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_type", "plan_id", "subscriber_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_type", "Widget"], ["plan_id", 464], ["subscriber_id", 398], ["created_at", "2015-04-21 20:53:12.944998"], ["updated_at", "2015-04-21 20:53:12.944998"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mFlyoverSubscriptions::Subscription Load (0.4ms)[0m  SELECT  "flyover_subscriptions_subscriptions".* FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."subscriber_id" = $1 AND "flyover_subscriptions_subscriptions"."subscriber_type" = $2 LIMIT 1  [["subscriber_id", 398], ["subscriber_type", "Widget"]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:53:13.006675"], ["updated_at", "2015-04-21 20:53:13.006675"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:53:13.010163"], ["updated_at", "2015-04-21 20:53:13.010163"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 399], ["subscriber_type", "Widget"], ["plan_id", 465], ["created_at", "2015-04-21 20:53:13.014343"], ["updated_at", "2015-04-21 20:53:13.014343"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"[0m  [["created_at", "2015-04-21 20:53:13.023558"], ["updated_at", "2015-04-21 20:53:13.023558"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:53:13.028539"], ["updated_at", "2015-04-21 20:53:13.028539"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["subscriber_id", 400], ["subscriber_type", "Widget"], ["plan_id", 466], ["created_at", "2015-04-21 20:53:13.032199"], ["updated_at", "2015-04-21 20:53:13.032199"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:53:13.036740"], ["updated_at", "2015-04-21 20:53:13.036740"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "flyover_subscriptions_subscriptions" SET "plan_id" = $1, "updated_at" = $2 WHERE "flyover_subscriptions_subscriptions"."id" = $3[0m  [["plan_id", 467], ["updated_at", "2015-04-21 20:53:13.039644"], ["id", 275]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "widgets" ("created_at", "updated_at") VALUES ($1, $2) RETURNING "id"  [["created_at", "2015-04-21 20:53:13.052583"], ["updated_at", "2015-04-21 20:53:13.052583"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "flyover_subscriptions_plans" ("price_in_cents", "stripe_id", "interval", "name", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["price_in_cents", 14900], ["stripe_id", "MemberCampus"], ["interval", "year"], ["name", "Member Campus"], ["created_at", "2015-04-21 20:53:13.055824"], ["updated_at", "2015-04-21 20:53:13.055824"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "flyover_subscriptions_subscriptions" ("subscriber_id", "subscriber_type", "plan_id", "created_at", "updated_at", "stripe_customer_token", "last_four") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["subscriber_id", 401], ["subscriber_type", "Widget"], ["plan_id", 468], ["created_at", "2015-04-21 20:53:13.058731"], ["updated_at", "2015-04-21 20:53:13.058731"], ["stripe_customer_token", "token_123"], ["last_four", "1234"]]
+  [1m[36m (0.3ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "flyover_subscriptions_subscriptions" WHERE "flyover_subscriptions_subscriptions"."id" = $1  [["id", 276]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "flyover_subscriptions_subscriptions"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK

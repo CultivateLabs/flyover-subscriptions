@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="well">
+    <% if @subscription.new_record? %>
+      <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
+        <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+        <%= render 'subscription_fields', f: f %>
+        <%= f.submit %>
+      <% end %>
+    <% else %>
+      <h3>Update Card</h3>
+      <p>
+        Using card **** **** **** <%= @subscription.last_four %>
+        <%= link_to "#update-card", data: { toggle: "collapse" } do %>
+          Update
+          <i class="fa fa-caret-down"></i>
+        <% end %>
+      </p>
+      <div id="update-card" class="collapse">
+        <%= form_for @subscription, html: { class: "stripe-form" } do |f| %>
+          <%= render 'subscription_fields', f: f %>
+          <%= f.submit %>
+        <% end %>
+      </div>
+      
+      <% unless @subscription.subscriber.flyover_subscription_plan.present? %>
+        <h3>Change Plan</h3>
+        <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
+          <%= f.association :plan %>
+          <%= f.submit %>
+        <% end %>
+      <% end %>
+      
+
+      <h3>List Charges</h3>
+      <% if @charges.data.length > 0 %>
+        <ul>
+          <% @charges.data.each do |charge| %>
+            <li><%= number_to_currency charge["amount"] / 100 %> on <%= Time.at(charge["created"]).strftime("%m/%d/%Y") %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="well">
+          <p>No Charges</p>
+        </div>
+      <% end %>
+
+      <h3>Cancel Subscription</h3>
+      <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+</div>

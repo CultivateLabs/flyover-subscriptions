@@ -3,6 +3,9 @@ require "flyover_subscriptions/acts_as_subscriber"
 require "jquery-rails"
 require "coffee-rails"
 require "stripe"
+require "bootstrap-sass"
+require "font-awesome-sass"
+require "simple_form"
 
 module FlyoverSubscriptions
   mattr_accessor :base_controller

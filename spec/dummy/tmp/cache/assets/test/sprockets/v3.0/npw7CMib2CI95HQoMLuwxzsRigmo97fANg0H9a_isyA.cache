@@ -1,0 +1,55 @@
+I"
+(function() {
+  var subscription;
+
+  $(function() {
+    if ($(".stripe-form").length > 0) {
+      Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+      return subscription.setupForm();
+    }
+  });
+
+  subscription = {
+    setupForm: function() {
+      return $('.stripe-form').submit(function() {
+        $('.stripe-form input[type=submit]').attr('disabled', true);
+        if ($('#card_number').length) {
+          subscription.processCard();
+          return false;
+        } else {
+          return true;
+        }
+      });
+    },
+    processCard: function() {
+      var card, date, month, regex, year;
+      regex = new RegExp(/\d\d\/\d\d/);
+      if (regex.test($("#card_expiration").val())) {
+        date = $("#card_expiration").val().split("/");
+        month = date[0];
+        year = parseInt(date[1]) + 2000;
+      } else {
+        month = (new Date).getMonth();
+        year = (new Date).getFullYear();
+      }
+      card = {
+        number: $('#card_number').val(),
+        cvc: $('#card_code').val(),
+        expMonth: month,
+        expYear: year
+      };
+      return Stripe.createToken(card, subscription.handleStripeResponse);
+    },
+    handleStripeResponse: function(status, response) {
+      if (status === 200) {
+        $('#stripe-card-token').val(response.id);
+        return $('.stripe-form')[0].submit();
+      } else {
+        $('#stripe_error').text(response.error.message).show();
+        return $('.stripe-form input[type=submit]').attr('disabled', false);
+      }
+    }
+  };
+
+}).call(this);
+:ET

@@ -15,6 +15,10 @@ module FlyoverSubscriptions
       def cancel_subscription
         self.subscription.cancel_stripe_subscription
       end
+
+      def flyover_subscription_plan
+        nil
+      end
     end
   end
 end
