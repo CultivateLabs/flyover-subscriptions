@@ -6,4 +6,5 @@ class ApplicationController < ActionController::Base
   def current_subscriber
     Widget.first
   end
+  helper_method :current_subscriber
 end

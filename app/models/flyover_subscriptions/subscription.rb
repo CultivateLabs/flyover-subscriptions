@@ -18,11 +18,16 @@ module FlyoverSubscriptions
 
     def cancel_stripe_subscription
       customer.cancel_subscription
-      self.update_column("archived", true)
     rescue ::Stripe::InvalidRequestError => e
       logger.error "Stripe error while cancelling subscription: #{e.message}"
       errors.add :base, "There was a problem cancelling your subscription plan."
       false
+    end
+
+    def set_quantity_to_zero
+      stripe_subscription.quantity = 0
+      stripe_subscription.save
+      self.update_column("archived", true)
     end
 
     def customer
@@ -32,6 +37,10 @@ module FlyoverSubscriptions
       else
         ::Stripe::Customer.create(description: self.subscriber.email, email: self.subscriber.email, plan: self.plan.stripe_id, card: self.stripe_card_token)
       end
+    end
+
+    def stripe_subscription
+      @stripe_subscription ||= customer.subscriptions.first
     end
 
   private
@@ -52,11 +61,11 @@ module FlyoverSubscriptions
         customer.save
         self.last_four = customer.sources.retrieve(customer.default_source).last4
       elsif self.archived?
-        customer.subscriptions.create(plan: self.plan.stripe_id)
+        stripe_subscription.quantity = 1
+        stripe_subscription.save
         self.update_column("archived", false)
       elsif self.plan.present?
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
-        self.last_four = customer.sources.retrieve(customer.default_source).last4
       end
     rescue ::Stripe::InvalidRequestError => e
       logger.error "Stripe error while updating plan: #{e.message}"

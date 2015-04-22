@@ -33,7 +33,7 @@ module FlyoverSubscriptions
 
     def destroy
       @subscription = subscriber.subscription
-      @subscription.cancel_stripe_subscription
+      @subscription.set_quantity_to_zero
       redirect_to subscriptions_path, notice: "You have unsubscribed successfully."
     end
 
@@ -41,6 +41,7 @@ module FlyoverSubscriptions
     def load_charges
       Stripe.api_key = ENV["STRIPE_SECRET"]
       @charges = Stripe::Customer.retrieve(@subscription.stripe_customer_token).charges
+      @upcoming_invoices = Stripe::Invoice.upcoming(customer: @subscription.stripe_customer_token)
     end
 
     def subscription_params

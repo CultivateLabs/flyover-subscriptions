@@ -1,0 +1,68 @@
+<% if @subscription.new_record? %>
+  <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
+    <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+    <%= render 'subscription_fields', f: f %>
+    <%= f.submit "Subscribe", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+
+  <% if @subscription.archived? %>
+    <div class="alert alert-danger">
+      Your subscription is not active! Click to resubscribe:
+    </div>
+    <%= simple_form_for @subscription do |f| %>
+      <%= f.input_field :id, as: :hidden %>
+      <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+      <%= f.submit "Resubscribe", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+
+  <h3>Update Card</h3>
+  <p>
+    Using card **** **** **** <%= @subscription.last_four %>
+    <%= link_to "#update-card", data: { toggle: "collapse" } do %>
+      Update
+      <i class="fa fa-caret-down"></i>
+    <% end %>
+  </p>
+  <div id="update-card" class="collapse">
+    <%= form_for @subscription, html: { class: "stripe-form" } do |f| %>
+      <%= render 'subscription_fields', f: f %>
+      <%= f.submit "Update Card", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% unless @subscription.subscriber.flyover_subscription_plan.present? %>
+    <h3>Change Plan</h3>
+    <%= simple_form_for @subscription do |f| %>
+      <%= f.association :plan %>
+      <%= f.submit "Update Plan", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+
+
+  <h3>List Charges</h3>
+  <h4>Upcoming</h4>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <%= number_to_currency @upcoming_invoices.total / 100 %> 
+      on <%= Time.at(@upcoming_invoices.next_payment_attempt).strftime("%m/%d/%Y") %>
+    </li>
+  </ul>
+  <% if @charges && @charges.data.length > 0 %>
+    <ul class="list-group">
+      <% @charges.data.each do |charge| %>
+        <li class="list-group-item"><%= number_to_currency charge["amount"] / 100 %> on <%= Time.at(charge["created"]).strftime("%m/%d/%Y") %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="well">
+      <p>No Charges</p>
+    </div>
+  <% end %>
+
+  <% unless @subscription.archived? %>
+    <h3>Cancel Subscription</h3>
+    <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+  <% end %>
+<% end %>
