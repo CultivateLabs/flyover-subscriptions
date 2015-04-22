@@ -6,6 +6,7 @@ module StripeHelper
       allow(customer).to receive(:default_source)
       allow(customer).to receive(:card=).and_return(true)
       allow(customer).to receive(:charges).and_return(double(data: []))
+      allow(customer).to receive(:subscriptions).and_return(subscriptions)
       customer
     end
   end
@@ -21,6 +22,23 @@ module StripeHelper
       sources = double
       allow(sources).to receive(:retrieve).and_return(card)
       sources
+    end
+  end
+
+  def subscriptions
+    @subscriptions ||= begin
+      subscriptions = double
+      allow(subscriptions).to receive(:first).and_return(subscription)
+      subscriptions      
+    end
+  end
+
+  def subscription
+    @subscription ||= begin 
+      subscription = double(quantity: 0)
+      allow(subscription).to receive(:quantity=)
+      allow(subscription).to receive(:save).and_return(true)
+      subscription
     end
   end
 
