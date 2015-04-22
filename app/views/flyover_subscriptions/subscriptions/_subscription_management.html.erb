@@ -49,6 +49,7 @@
       on <%= Time.at(@upcoming_invoices.next_payment_attempt).strftime("%m/%d/%Y") %>
     </li>
   </ul>
+  <h4>Past</h4>
   <% if @charges && @charges.data.length > 0 %>
     <ul class="list-group">
       <% @charges.data.each do |charge| %>
