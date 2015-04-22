@@ -46,22 +46,14 @@ module FlyoverSubscriptions
       false
     end
 
-    def resubscribe_stripe_customer
-      customer.subscriptions.create(plan: self.plan.stripe_id)
-      self.update_column("archived", false)
-    rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while creating subscription: #{e.message}"
-      errors.add :base, "There was a problem with your subscriptions."
-      false
-    end
-
     def update_stripe_plan
       if self.stripe_card_token.present?
         customer.card = self.stripe_card_token
         customer.save
         self.last_four = customer.sources.retrieve(customer.default_source).last4
       elsif self.archived?
-        resubscribe_stripe_customer
+        customer.subscriptions.create(plan: self.plan.stripe_id)
+        self.update_column("archived", false)
       elsif self.plan.present?
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
         self.last_four = customer.sources.retrieve(customer.default_source).last4
