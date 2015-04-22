@@ -5,7 +5,7 @@ module FlyoverSubscriptions
     belongs_to :subscriber, polymorphic: true
     belongs_to :plan
 
-    # validates_associated :subscriber
+    validates_associated :subscriber
 
     before_create :create_stripe_subscription
     before_update :update_stripe_plan

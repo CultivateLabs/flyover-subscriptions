@@ -6,13 +6,19 @@
         <%= render 'subscription_fields', f: f %>
         <%= f.submit "Subscribe", class: "btn btn-primary" %>
       <% end %>
-    <% elsif @subscription.archived? %>
-      <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
-        <%= f.input_field :id, as: :hidden %>
-        <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
-        <%= f.submit "Resubscribe", class: "btn btn-primary" %>
-      <% end %>
     <% else %>
+
+      <% if @subscription.archived? %>
+        <div class="alert alert-danger">
+          Your subscription is not active! Click to resubscribe:
+        </div>
+        <%= simple_form_for @subscription do |f| %>
+          <%= f.input_field :id, as: :hidden %>
+          <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+          <%= f.submit "Resubscribe", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+
       <h3>Update Card</h3>
       <p>
         Using card **** **** **** <%= @subscription.last_four %>
@@ -30,7 +36,7 @@
       
       <% unless @subscription.subscriber.flyover_subscription_plan.present? %>
         <h3>Change Plan</h3>
-        <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
+        <%= simple_form_for @subscription do |f| %>
           <%= f.association :plan %>
           <%= f.submit "Update Plan", class: "btn btn-primary" %>
         <% end %>
@@ -50,8 +56,10 @@
         </div>
       <% end %>
 
-      <h3>Cancel Subscription</h3>
-      <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      <% unless @subscription.archived? %>
+        <h3>Cancel Subscription</h3>
+        <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      <% end %>
     <% end %>
   </div>
 </div>
