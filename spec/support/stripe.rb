@@ -5,6 +5,7 @@ module StripeHelper
       allow(stripe_customer).to receive(:sources).and_return(sources)
       allow(stripe_customer).to receive(:default_source)
       allow(stripe_customer).to receive(:card=).and_return(true)
+      allow(stripe_customer).to receive(:save).and_return(true)
       allow(stripe_customer).to receive(:charges).and_return(double(data: []))
       allow(stripe_customer).to receive(:subscriptions).and_return(subscriptions)
       stripe_customer
