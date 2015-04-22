@@ -5,7 +5,7 @@ module FlyoverSubscriptions
     belongs_to :subscriber, polymorphic: true
     belongs_to :plan
 
-    validates_associated :subscriber
+    # validates_associated :subscriber
 
     before_create :create_stripe_subscription
     before_update :update_stripe_plan
@@ -18,11 +18,20 @@ module FlyoverSubscriptions
 
     def cancel_stripe_subscription
       customer.cancel_subscription
+      self.update_column("archived", true)
+    rescue ::Stripe::InvalidRequestError => e
+      logger.error "Stripe error while cancelling subscription: #{e.message}"
+      errors.add :base, "There was a problem cancelling your subscription plan."
+      false
     end
 
     def customer
       ::Stripe.api_key = ENV["STRIPE_SECRET"]
-      @customer ||= self.stripe_customer_token.present? ? ::Stripe::Customer.retrieve(self.stripe_customer_token) : ::Stripe::Customer.create(description: self.subscriber.email, email: self.subscriber.email, plan: self.plan.stripe_id, card: self.stripe_card_token)
+      @customer ||= if self.stripe_customer_token.present? 
+        ::Stripe::Customer.retrieve(self.stripe_customer_token)
+      else
+        ::Stripe::Customer.create(description: self.subscriber.email, email: self.subscriber.email, plan: self.plan.stripe_id, card: self.stripe_card_token)
+      end
     end
 
   private
@@ -37,11 +46,22 @@ module FlyoverSubscriptions
       false
     end
 
+    def resubscribe_stripe_customer
+      customer.subscriptions.create(plan: self.plan.stripe_id)
+      self.update_column("archived", false)
+    rescue ::Stripe::InvalidRequestError => e
+      logger.error "Stripe error while creating subscription: #{e.message}"
+      errors.add :base, "There was a problem with your subscriptions."
+      false
+    end
+
     def update_stripe_plan
       if self.stripe_card_token.present?
         customer.card = self.stripe_card_token
         customer.save
         self.last_four = customer.sources.retrieve(customer.default_source).last4
+      elsif self.archived?
+        resubscribe_stripe_customer
       elsif self.plan.present?
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
         self.last_four = customer.sources.retrieve(customer.default_source).last4

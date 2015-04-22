@@ -6,6 +6,12 @@
         <%= render 'subscription_fields', f: f %>
         <%= f.submit "Subscribe", class: "btn btn-primary" %>
       <% end %>
+    <% elsif @subscription.archived? %>
+      <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
+        <%= f.input_field :id, as: :hidden %>
+        <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+        <%= f.submit "Resubscribe", class: "btn btn-primary" %>
+      <% end %>
     <% else %>
       <h3>Update Card</h3>
       <p>
@@ -32,7 +38,7 @@
       
 
       <h3>List Charges</h3>
-      <% if @charges.data.length > 0 %>
+      <% if @charges && @charges.data.length > 0 %>
         <ul class="list-group">
           <% @charges.data.each do |charge| %>
             <li class="list-group-item"><%= number_to_currency charge["amount"] / 100 %> on <%= Time.at(charge["created"]).strftime("%m/%d/%Y") %></li>

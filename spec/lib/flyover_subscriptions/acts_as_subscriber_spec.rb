@@ -13,6 +13,12 @@ module FlyoverSubscriptions
         expect(widget.has_subscription?).to be_truthy
       end
 
+      it "returns false if a subscription is archived" do
+        widget = build(:widget)
+        create(:subscription, subscriber: widget, archived: true)
+        expect(widget.has_subscription?).to be_falsy
+      end
+
       it "returns false if no subscription is present" do
         widget = build(:widget)
         expect(widget.has_subscription?).to be_falsy

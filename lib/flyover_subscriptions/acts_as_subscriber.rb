@@ -9,7 +9,7 @@ module FlyoverSubscriptions
 
     module InstanceMethods
       def has_subscription?
-        self.subscription.present?
+        self.subscription.present? && !self.subscription.archived?
       end
 
       def cancel_subscription

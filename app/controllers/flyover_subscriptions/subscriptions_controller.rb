@@ -22,6 +22,7 @@ module FlyoverSubscriptions
 
     def update
       @subscription = subscriber.subscription
+      @subscription.plan = subscriber.flyover_subscription_plan if subscriber.flyover_subscription_plan.present?
 
       if @subscription.update(subscription_params)
         redirect_to subscriptions_path, notice: "Your subscription was updated successfully!"
@@ -32,7 +33,7 @@ module FlyoverSubscriptions
 
     def destroy
       @subscription = subscriber.subscription
-      @subscription.destroy
+      @subscription.cancel_stripe_subscription
       redirect_to subscriptions_path, notice: "You have unsubscribed successfully."
     end
 
@@ -43,7 +44,7 @@ module FlyoverSubscriptions
     end
 
     def subscription_params
-      params.require(:subscription).permit(:plan_id, :stripe_card_token)
+      params.require(:subscription).permit(:id, :plan_id, :stripe_card_token)
     end
 
     def subscriber
