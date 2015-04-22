@@ -7,6 +7,7 @@ RSpec.configure do |config|
     allow(@customer).to receive(:sources).and_return(cards_double)
     allow(@customer).to receive(:default_source)
     allow(@customer).to receive(:card=).and_return(true)
+    allow(@customer).to receive(:charges).and_return(double(data: []))
     allow(cards_double).to receive(:retrieve).and_return(double(last4: "1234"))
   end
 end

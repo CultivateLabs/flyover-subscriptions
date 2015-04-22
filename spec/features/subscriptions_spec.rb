@@ -32,6 +32,24 @@ describe "Subscriptions" do
     end
   end
 
+  it "shows the subscription form when a subscriber is not subscribed" do
+    create(:widget)
+    visit flyover_subscriptions.subscriptions_path
+    expect(page).to have_css("#card_number")
+    expect(page).to have_css("#card_code")
+    expect(page).to have_css("#card_expiration")
+  end
+
+  it "shows the subscription form when a subscriber is not subscribed" do
+    widget = create(:widget)
+    subscription = create(:subscription, subscriber: widget)
+    
+    visit flyover_subscriptions.subscriptions_path
+    expect(page).to have_content "Update Card"
+    expect(page).to have_content "List Charges"
+    expect(page).to have_content "Cancel Subscription"
+  end
+
   context "with a valid card number" do
     it "creates a subscription"
   end
