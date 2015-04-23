@@ -35,32 +35,32 @@ module FlyoverSubscriptions
       expect(stripe_customer).not_to receive(:update_subscription)
 
       subscription.set_stripe_quantity_to_zero
-      expect(subscription.archived).to be_truthy
+      expect(subscription.archived?).to be_truthy
     end
 
     describe "resubscribes a customer" do
       context "with a stripe subscription" do
         it "updates the plan" do
-          subscription = create(:subscription, archived: true)
+          subscription = create(:subscription, archived_at: 2.weeks.ago)
           allow(subscriptions).to receive(:total_count).and_return(1)
           expect(stripe_subscription).to receive(:plan=)
           expect(stripe_subscription).to receive(:save)
 
           subscription.updated_at = Time.now
           subscription.save
-          expect(subscription.archived).to be_falsy
+          expect(subscription.archived?).to be_falsy
         end
       end
 
       context "with no stripe subscription" do
         it "creates a new stripe subscription" do
-          subscription = create(:subscription, archived: true)
+          subscription = create(:subscription, archived_at: 2.weeks.ago)
           allow(subscriptions).to receive(:total_count).and_return(0)
           expect(subscriptions).to receive(:create)
 
           subscription.updated_at = Time.now
           subscription.save
-          expect(subscription.archived).to be_falsy
+          expect(subscription.archived?).to be_falsy
         end
       end
     end

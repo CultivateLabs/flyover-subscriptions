@@ -6,7 +6,16 @@
   <% end %>
 <% else %>
 
-  <% if @subscription.archived? %>
+  <% if @subscription.will_cancel? %>
+    <div class="alert alert-danger">
+      Your subscription will end on <%= @subscription.archived_at.strftime("%m/%d/%Y") %> Click to resubscribe:
+    </div>
+    <%= simple_form_for @subscription do |f| %>
+      <%= f.input_field :id, as: :hidden %>
+      <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+      <%= f.submit "Resubscribe", class: "btn btn-primary" %>
+    <% end %>
+  <% elsif @subscription.archived? %>
     <div class="alert alert-danger">
       Your subscription is not active! Click to resubscribe:
     </div>
@@ -62,7 +71,7 @@
     </div>
   <% end %>
 
-  <% unless @subscription.archived? %>
+  <% unless @subscription.archived? || @subscription.will_cancel? %>
     <h3>Cancel Subscription</h3>
     <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
   <% end %>

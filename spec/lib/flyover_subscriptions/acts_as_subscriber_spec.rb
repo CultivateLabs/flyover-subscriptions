@@ -15,7 +15,7 @@ module FlyoverSubscriptions
 
       it "returns false if a subscription is archived" do
         widget = build(:widget)
-        create(:subscription, subscriber: widget, archived: true)
+        create(:subscription, subscriber: widget, archived_at: 2.weeks.ago)
         expect(widget.has_subscription?).to be_falsy
       end
 

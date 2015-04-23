@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421220538) do
+ActiveRecord::Schema.define(version: 20150423144501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20150421220538) do
     t.integer  "subscriber_id"
     t.string   "subscriber_type"
     t.string   "stripe_customer_token"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "plan_id"
     t.string   "last_four"
-    t.boolean  "archived",              default: false
+    t.datetime "archived_at"
   end
 
   add_index "flyover_subscriptions_subscriptions", ["plan_id"], name: "index_flyover_subscriptions_subscriptions_on_plan_id", using: :btree
