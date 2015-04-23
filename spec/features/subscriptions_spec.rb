@@ -50,7 +50,7 @@ describe "Subscriptions" do
     end
   end
 
-  context "with a valid card number", js: true, focus: true do
+  context "with a valid card number", js: true do
     it "fills in the stripe customer token" do
       plan = create :plan
       visit flyover_subscriptions.subscriptions_path
