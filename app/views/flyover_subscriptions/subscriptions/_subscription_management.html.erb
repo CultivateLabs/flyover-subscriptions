@@ -5,74 +5,122 @@
     <%= f.submit "Subscribe", class: "btn btn-primary" %>
   <% end %>
 <% else %>
-
-  <% if @subscription.will_cancel? %>
-    <div class="alert alert-danger">
-      Your subscription will end on <%= @subscription.archived_at.strftime("%m/%d/%Y") %> Click to resubscribe:
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Billing Overview
+      </h3>
     </div>
-    <%= simple_form_for @subscription do |f| %>
-      <%= f.input_field :id, as: :hidden %>
-      <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
-      <%= f.submit "Resubscribe", class: "btn btn-primary" %>
-    <% end %>
-  <% elsif @subscription.archived? %>
-    <div class="alert alert-danger">
-      Your subscription is not active! Click to resubscribe:
-    </div>
-    <%= simple_form_for @subscription do |f| %>
-      <%= f.input_field :id, as: :hidden %>
-      <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
-      <%= f.submit "Resubscribe", class: "btn btn-primary" %>
-    <% end %>
-  <% end %>
-
-  <h3>Update Card</h3>
-  <p>
-    Using card **** **** **** <%= @subscription.last_four %>
-    <%= link_to "#update-card", data: { toggle: "collapse" } do %>
-      Update
-      <i class="fa fa-caret-down"></i>
-    <% end %>
-  </p>
-  <div id="update-card" class="collapse">
-    <%= form_for @subscription, html: { class: "stripe-form" } do |f| %>
-      <%= render 'subscription_fields', f: f %>
-      <%= f.submit "Update Card", class: "btn btn-primary" %>
-    <% end %>
+    <table class="table">
+      <tbody>
+        <% if @subscription.will_cancel? %>
+          <tr class="danger">
+            <td class='text-muted'>Subscription ending</td>
+            <td>Your subscription will end on <%= @subscription.archived_at.strftime("%m/%d/%Y") %>. Click to resubscribe:</td>
+            <td>
+              <%= simple_form_for @subscription do |f| %>
+                <%= f.input_field :id, as: :hidden %>
+                <%= f.submit "Resubscribe", class: "btn btn-xs btn-primary pull-right" %>
+              <% end %>
+            </td>
+          </tr>
+        <% elsif @subscription.archived? %>
+          <tr class="danger">
+            <td class='text-muted'>Subscription canceled</td>
+            <td>Your subscription is not active. Click to resubscribe:</td>
+            <td>
+              <%= simple_form_for @subscription do |f| %>
+                <%= f.input_field :id, as: :hidden %>
+                <%= f.submit "Resubscribe", class: "btn btn-xs btn-primary pull-right" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <% unless @subscription.subscriber.flyover_subscription_plan.present? %>
+          <tr>
+            <%= simple_form_for @subscription do |f| %>
+              <td class='text-muted'>Plan</td>
+              <td><%= f.association :plan, label: false %></td>
+              <td><%= f.submit "Update Plan", class: "btn btn-default btn-xs pull-right" %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr>
+          <td class='text-muted'>Payment</td>
+          <td>
+            <p>Using card **** **** **** <%= @subscription.last_four %></p>
+            <p>Next payment due: <%= date_from_stripe_timestamp(@upcoming_invoices.next_payment_attempt) %></p>
+            <p>Amount: <%= number_to_currency @upcoming_invoices.total / 100 %></p> 
+          </td>
+          <td>
+            <%= link_to icon("credit-card", "Update Card"), "#update-card", class: "btn btn-xs btn-default pull-right", data: { toggle: "collapse" } %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='3' style="padding: 0; border: none;">
+            <div id="update-card" class="collapse">
+              <div style='padding: 10px;'>
+                <%= form_for @subscription, html: { class: "stripe-form" } do |f| %>
+                  <%= render 'subscription_fields', f: f %>
+                  <%= f.submit "Update Card", class: "btn btn-primary pull-right" %>
+                  <div class="clearfix"></div>
+                <% end %>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% unless @subscription.archived? || @subscription.will_cancel? %>
+          <tr>
+            <td class='text-muted'>Cancel</td>
+            <td>
+              Unhappy? Click to cancel your subscription
+            </td>
+            <td>
+              <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-xs btn-danger pull-right", data: { confirm: "Are you sure?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
-  <% unless @subscription.subscriber.flyover_subscription_plan.present? %>
-    <h3>Change Plan</h3>
-    <%= simple_form_for @subscription do |f| %>
-      <%= f.association :plan %>
-      <%= f.submit "Update Plan", class: "btn btn-primary" %>
-    <% end %>
-  <% end %>
-
-
-  <h3>List Charges</h3>
-  <h4>Upcoming</h4>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <%= number_to_currency @upcoming_invoices.total / 100 %> 
-      on <%= date_from_stripe_timestamp(@upcoming_invoices.next_payment_attempt) %>
-    </li>
-  </ul>
-  <h4>Past</h4>
-  <% if @charges && @charges.data.length > 0 %>
-    <ul class="list-group">
-      <% @charges.each do |charge| %>
-        <li class="list-group-item"><%= number_to_currency charge.amount / 100 %> on <%= date_from_stripe_timestamp(charge.created) %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <div class="well">
-      <p>No Charges</p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Payment History
+      </h3>
     </div>
-  <% end %>
-
-  <% unless @subscription.archived? || @subscription.will_cancel? %>
-    <h3>Cancel Subscription</h3>
-    <%= link_to "Cancel Subscription", @subscription, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-  <% end %>
+    <% if @charges && @charges.data.length > 0 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Card</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @charges.each do |charge| %>
+          <tr>
+            <td>
+              <% if charge.status == "succeeded" %>
+                <i class="fa fa-check text-success"></i>
+              <% else %>
+                <i class="fa fa-exclamation-triangle text-danger"></i>
+              <% end %>
+            </td>
+            <td><%= date_from_stripe_timestamp(charge.created) %></td>
+            <td><%= number_to_currency charge.amount / 100 %></td>
+            <td><%= charge.source.brand %> **** **** **** <%= charge.source.last4 %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% else %>
+      <div class="well">
+        You have not made any payments yet.
+      </div>
+    <% end %>
+  </div>
 <% end %>
