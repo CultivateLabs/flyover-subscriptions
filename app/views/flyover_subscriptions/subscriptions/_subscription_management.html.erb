@@ -1,9 +1,18 @@
 <% if @subscription.new_record? %>
-  <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
-    <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
-    <%= render 'subscription_fields', f: f %>
-    <%= f.submit "Subscribe", class: "btn btn-primary" %>
-  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Subscribe
+      </h3>
+    </div>
+    <div class="panel-body">
+      <%= simple_form_for @subscription, html: { class: "stripe-form" } do |f| %>
+        <%= f.association :plan unless @subscription.subscriber.flyover_subscription_plan.present? %>
+        <%= render 'subscription_fields', f: f %>
+        <%= f.submit "Subscribe", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 <% else %>
   <div class="panel panel-default">
     <div class="panel-heading">
