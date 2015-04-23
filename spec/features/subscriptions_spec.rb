@@ -17,8 +17,9 @@ describe "Subscriptions" do
     EOS
   end
 
+  let!(:widget){ create(:widget) }
+
   it "shows the subscription form when a subscriber is not subscribed" do
-    create(:widget)
     visit flyover_subscriptions.subscriptions_path
 
     expect(page).to have_css 'meta[name="stripe-key"]', visible: false
@@ -28,7 +29,6 @@ describe "Subscriptions" do
   end
 
   it "shows subscription info when a subscriber is subscribed" do
-    widget = create(:widget)
     subscription = create(:subscription, subscriber: widget)
     
     visit flyover_subscriptions.subscriptions_path
@@ -39,8 +39,6 @@ describe "Subscriptions" do
 
   context "with an invalid card number" do
     it "displays an error", js: true do
-      widget = create :widget
-
       visit flyover_subscriptions.subscriptions_path
 
       expect(page).to have_selector("#card_number")
@@ -52,11 +50,9 @@ describe "Subscriptions" do
     end
   end
 
-  context "with a valid card number", js: true do
+  context "with a valid card number", js: true, focus: true do
     it "fills in the stripe customer token" do
-      widget = create :widget
       plan = create :plan
-
       visit flyover_subscriptions.subscriptions_path
 
       expect(page).to have_selector("#card_number")
