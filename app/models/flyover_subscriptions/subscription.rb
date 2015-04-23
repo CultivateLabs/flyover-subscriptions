@@ -35,7 +35,7 @@ module FlyoverSubscriptions
       @customer ||= if self.stripe_customer_token.present? 
         ::Stripe::Customer.retrieve(self.stripe_customer_token)
       else
-        ::Stripe::Customer.create(description: self.subscriber.email, email: self.subscriber.email, plan: self.plan.stripe_id, card: self.stripe_card_token)
+        ::Stripe::Customer.create(description: subscriber.email, email: subscriber.email, plan: plan.stripe_id, card: stripe_card_token)
       end
     end
 
