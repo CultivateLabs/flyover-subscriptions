@@ -100,34 +100,34 @@
       </h3>
     </div>
     <% if @charges && @charges.data.length > 0 %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Date</th>
-          <th>Amount</th>
-          <th>Card</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @charges.each do |charge| %>
+      <table class="table">
+        <thead>
           <tr>
-            <td>
-              <% if charge.status == "succeeded" %>
-                <i class="fa fa-check text-success"></i>
-              <% else %>
-                <i class="fa fa-exclamation-triangle text-danger"></i>
-              <% end %>
-            </td>
-            <td><%= date_from_stripe_timestamp(charge.created) %></td>
-            <td><%= number_to_currency charge.amount / 100 %></td>
-            <td><%= charge.source.brand %> **** **** **** <%= charge.source.last4 %></td>
+            <th></th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Card</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @charges.each do |charge| %>
+            <tr>
+              <td>
+                <% if charge.status == "succeeded" %>
+                  <i class="fa fa-check text-success"></i>
+                <% else %>
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                <% end %>
+              </td>
+              <td><%= date_from_stripe_timestamp(charge.created) %></td>
+              <td><%= number_to_currency charge.amount / 100 %></td>
+              <td><%= charge.source.brand %> **** **** **** <%= charge.source.last4 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% else %>
-      <div class="well">
+      <div class="panel-body">
         You have not made any payments yet.
       </div>
     <% end %>
