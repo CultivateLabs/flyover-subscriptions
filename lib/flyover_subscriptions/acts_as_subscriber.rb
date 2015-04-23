@@ -11,8 +11,8 @@ module FlyoverSubscriptions
         self.subscription.present? && !self.subscription.archived?
       end
 
-      def cancel_subscription
-        self.subscription.cancel_stripe_subscription
+      def cancel_subscription(at_period_end)
+        self.subscription.cancel_stripe_subscription(at_period_end)
       end
 
       def flyover_subscription_plan

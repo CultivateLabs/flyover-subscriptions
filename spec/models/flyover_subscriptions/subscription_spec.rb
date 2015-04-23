@@ -34,24 +34,41 @@ module FlyoverSubscriptions
       expect(stripe_customer).not_to receive(:card=)
       expect(stripe_customer).not_to receive(:update_subscription)
 
-      subscription.set_quantity_to_zero
+      subscription.set_stripe_quantity_to_zero
       expect(subscription.archived).to be_truthy
     end
 
-    it "resubscribes a customer by setting quantity to 1 when an archived subscription is updated" do
-      subscription = create(:subscription, archived: true)
-      expect(stripe_subscription).to receive(:quantity=).with(1)
-      expect(stripe_customer).not_to receive(:card=)
-      expect(stripe_customer).not_to receive(:update_subscription)
-      subscription.updated_at = Time.now
-      subscription.save
-      expect(subscription.archived).to be_falsy
+    describe "resubscribes a customer" do
+      context "with a stripe subscription" do
+        it "updates the plan" do
+          subscription = create(:subscription, archived: true)
+          allow(subscriptions).to receive(:total_count).and_return(1)
+          expect(stripe_subscription).to receive(:plan=)
+          expect(stripe_subscription).to receive(:save)
+
+          subscription.updated_at = Time.now
+          subscription.save
+          expect(subscription.archived).to be_falsy
+        end
+      end
+
+      context "with no stripe subscription" do
+        it "creates a new stripe subscription" do
+          subscription = create(:subscription, archived: true)
+          allow(subscriptions).to receive(:total_count).and_return(0)
+          expect(subscriptions).to receive(:create)
+
+          subscription.updated_at = Time.now
+          subscription.save
+          expect(subscription.archived).to be_falsy
+        end
+      end
     end
 
     it "cancels the stripe subscription when the subscriber is deleted" do
       subscription = create(:subscription)
       
-      expect(stripe_customer).to receive(:cancel_subscription)
+      expect(stripe_subscription).to receive(:delete).with(at_period_end: false)
       expect{
         subscription.subscriber.destroy
       }.to change(FlyoverSubscriptions::Subscription, :count).by(-1)

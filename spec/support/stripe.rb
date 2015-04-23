@@ -30,6 +30,7 @@ module StripeHelper
     @subscriptions ||= begin
       subscriptions = double
       allow(subscriptions).to receive(:first).and_return(stripe_subscription)
+      allow(subscriptions).to receive(:total_count)
       subscriptions      
     end
   end

@@ -33,7 +33,7 @@ module FlyoverSubscriptions
 
     def destroy
       @subscription = subscriber.subscription
-      @subscription.set_quantity_to_zero
+      @subscription.cancel_stripe_subscription(true)
       redirect_to subscriptions_path, notice: "You have unsubscribed successfully."
     end
 

@@ -16,18 +16,41 @@ module FlyoverSubscriptions
       @stripe_card_token = token
     end
 
-    def cancel_stripe_subscription
-      customer.cancel_subscription
+    def cancel_stripe_subscription(at_period_end = false)
+      response = stripe_subscription.delete(at_period_end: at_period_end)
+      cancel_time = at_period_end ? Time.at(response.current_period_end) : Time.now
+      self.update_column("archived", true)
+      # self.update_column("archived_at", cancel_time)
     rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while cancelling subscription: #{e.message}"
-      errors.add :base, "There was a problem cancelling your subscription plan."
+      logger.error "Stripe error while canceling subscription: #{e.message}"
+      errors.add :base, "There was a problem canceling your subscription plan."
       false
     end
 
-    def set_quantity_to_zero
+    def set_stripe_quantity_to_zero
       stripe_subscription.quantity = 0
       stripe_subscription.save
       self.update_column("archived", true)
+      # self.update_column("archived_at", Time.now)
+    rescue ::Stripe::InvalidRequestError => e
+      logger.error "Stripe error while updating subscription: #{e.message}"
+      errors.add :base, "There was a problem updating your subscription."
+      false
+    end
+
+    def resubscribe_to_stripe
+      if customer.subscriptions.total_count > 0
+        stripe_subscription.plan = self.plan.stripe_id
+        stripe_subscription.save
+      else
+        customer.subscriptions.create(plan: self.plan.stripe_id)
+      end
+      self.update_column("archived", false)
+      # self.update_column("archived_at", nil)
+    rescue ::Stripe::InvalidRequestError => e
+      logger.error "Stripe error while updating subscription: #{e.message}"
+      errors.add :base, "There was a problem updating your subscription."
+      false
     end
 
     def customer
@@ -61,9 +84,7 @@ module FlyoverSubscriptions
         customer.save
         self.last_four = customer.sources.retrieve(customer.default_source).last4
       elsif self.archived?
-        stripe_subscription.quantity = 1
-        stripe_subscription.save
-        self.update_column("archived", false)
+        resubscribe_to_stripe
       elsif self.plan.present?
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
       end

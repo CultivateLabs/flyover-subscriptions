@@ -47,7 +47,7 @@ describe "Subscriptions" do
       page.execute_script stripe_js_error
 
       fill_in :card_number, with: "123"
-      click_button "Create Subscription"
+      click_button "Subscribe"
       expect(page).to have_content "This card number looks invalid."
     end
   end
@@ -55,16 +55,18 @@ describe "Subscriptions" do
   context "with a valid card number", js: true do
     it "fills in the stripe customer token" do
       widget = create :widget
+      plan = create :plan
 
       visit flyover_subscriptions.subscriptions_path
 
       expect(page).to have_selector("#card_number")
       page.execute_script stripe_js_success
 
+      select plan.name, from: "subscription_plan_id"
       fill_in :card_number, with: "4242424242424242"
       fill_in :card_code, with: "123"
       fill_in :card_expiration, with: "02/19"
-      click_button "Create Subscription"
+      click_button "Subscribe"
 
       expect(page).to_not have_content "This card number looks invalid."
     end
