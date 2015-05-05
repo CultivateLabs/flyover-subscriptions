@@ -10,14 +10,11 @@ require "stripe"
 require "stripe_event"
 
 module FlyoverSubscriptions
-  mattr_accessor :base_controller
+  mattr_accessor :base_controller, :current_subscriber_method, :notifications_from_email, :notifications_admin_email
   @@base_controller = "::ApplicationController"
-
-  mattr_accessor :current_subscriber_method
   @@current_subscriber_method = "current_subscriber"
-
-  mattr_accessor :notifications_from_email
   @@notifications_from_email = "noreply@example.com"
+  @@notifications_admin_email = "you@example.com"
 
   def self.configure(&block)
     yield self

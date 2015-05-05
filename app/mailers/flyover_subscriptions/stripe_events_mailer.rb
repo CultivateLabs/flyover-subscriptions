@@ -14,5 +14,11 @@ module FlyoverSubscriptions
 
       mail to: @subscriber.email
     end
+    def failed_charge_notify_admin(subscriber, app_name)
+      @subscriber = subscriber
+      @app_name = app_name
+
+      mail to: @subscriber.email
+    end
   end
 end
