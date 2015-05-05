@@ -18,7 +18,7 @@ module FlyoverSubscriptions
       @subscriber = subscriber
       @app_name = app_name
 
-      mail to: @subscriber.email
+      mail to: FlyoverSubscriptions.notifications_admin_email
     end
   end
 end
