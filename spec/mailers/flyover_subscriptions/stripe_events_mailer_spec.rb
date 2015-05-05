@@ -3,7 +3,7 @@ require "rails_helper"
 module FlyoverSubscriptions
   RSpec.describe StripeEventsMailer, type: :mailer do
     describe "failed_charge_notify_customer" do
-      let(:mail) { StripeEventsMailer.failed_charge_notify_customer(double(email: "to@example.org")) }
+      let(:mail) { StripeEventsMailer.failed_charge_notify_customer(double(email: "to@example.org"), "Test App", "The Team", "Greetings") }
 
       it "renders the headers" do
         expect(mail.subject).to eq I18n.t('flyover_subscriptions.stripe_events_mailer.failed_charge_notify_customer.subject')
@@ -12,7 +12,7 @@ module FlyoverSubscriptions
       end
 
       it "renders the body" do
-        expect(mail.body.encoded).to match("Hi")
+        expect(mail.body.encoded).to match("Greetings")
       end
     end
 
