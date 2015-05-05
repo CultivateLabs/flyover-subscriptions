@@ -22,6 +22,7 @@
 en:
   hello: "Hello world"
 
-  stripe_events_mailer:
-    failed_charge_notify_customer:
-      subject: "Failed Credit Card Payment"
+  flyover_subscriptions:
+    stripe_events_mailer:
+      failed_charge_notify_customer:
+        subject: "Failed Credit Card Payment"
