@@ -6,9 +6,11 @@ module FlyoverSubscriptions
     #
     #   en.flyover_subscriptions.stripe_events_mailer.failed_charge_notify_customer.subject
     #
-    def failed_charge_notify_customer(subscriber)
+    def failed_charge_notify_customer(subscriber, app_name, signature, greeting="Hi")
       @subscriber = subscriber
-      @greeting = "Hi"
+      @greeting = greeting
+      @app_name = app_name
+      @signature = signature
 
       mail to: @subscriber.email
     end

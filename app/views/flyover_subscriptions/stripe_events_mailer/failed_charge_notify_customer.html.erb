@@ -1,5 +1,12 @@
-<h1>StripeEventsMailer#failed_charge_notify_customer</h1>
+<p>
+  <%= @greeting %>,
+</p>
 
 <p>
-  <%= @greeting %>, find me in app/views/flyover_subscriptions/stripe_events_mailer/failed_charge_notify_customer.html.erb
+  We just wanted to let you know that there was a problem with your credit card on <%= @app_name %>. We will try to bill your subscription payment 3 times before it is automatically cancelled. Please log in and update your credit card to avoid cancellation.</p>
+
+<p>
+  Thanks,
+  <br>
+  <%= @signature %>
 </p>
