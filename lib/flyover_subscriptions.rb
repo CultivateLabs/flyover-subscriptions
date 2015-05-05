@@ -16,6 +16,9 @@ module FlyoverSubscriptions
   mattr_accessor :current_subscriber_method
   @@current_subscriber_method = "current_subscriber"
 
+  mattr_accessor :notifications_from_email
+  @@notifications_from_email = "noreply@example.com"
+
   def self.configure(&block)
     yield self
   end

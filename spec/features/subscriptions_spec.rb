@@ -33,7 +33,7 @@ describe "Subscriptions" do
     
     visit flyover_subscriptions.subscriptions_path
     expect(page).to have_content "Update Card"
-    expect(page).to have_content "List Charges"
+    expect(page).to have_content "Payment History"
     expect(page).to have_content "Cancel Subscription"
   end
 
