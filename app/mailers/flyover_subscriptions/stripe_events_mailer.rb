@@ -4,9 +4,9 @@ module FlyoverSubscriptions
     # Subject can be set in your I18n file at config/locales/en.yml
     # with the following lookup:
     #
-    #   en.flyover_subscriptions.stripe_events_mailer.failed_charge_notify_customer.subject
+    #   en.flyover_subscriptions.stripe_events_mailer.invoice_payment_failed_notify_customer.subject
     #
-    def failed_charge_notify_customer(subscriber, app_name, signature, greeting="Hi")
+    def invoice_payment_failed_notify_customer(subscriber, app_name, signature, greeting="Hi")
       @subscriber = subscriber
       @greeting = greeting
       @app_name = app_name
@@ -14,10 +14,10 @@ module FlyoverSubscriptions
 
       mail to: @subscriber.email
     end
-    def failed_charge_notify_admin(subscriber, app_name, charge_id)
+    def invoice_payment_failed_notify_admin(subscriber, app_name, invoice_id)
       @subscriber = subscriber
       @app_name = app_name
-      @charge_id = charge_id
+      @invoice_id = invoice_id
 
       mail to: FlyoverSubscriptions.notifications_admin_email
     end

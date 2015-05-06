@@ -24,7 +24,7 @@ en:
 
   flyover_subscriptions:
     stripe_events_mailer:
-      failed_charge_notify_customer:
+      invoice_payment_failed_notify_customer:
         subject: "Failed Credit Card Payment"
-      failed_charge_notify_admin:
+      invoice_payment_failed_notify_admin:
         subject: "Failed Credit Card Payment"
