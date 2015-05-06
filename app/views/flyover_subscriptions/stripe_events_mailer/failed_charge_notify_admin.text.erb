@@ -1,5 +1,8 @@
 Greetings,
 
-We just wanted to let you know that there was a problem billing the credit card on file for <%= @subscriber.email %>. You can log into your Stripe dashboard or get in touch with the customer to try and resolve the issue.
+We just wanted to let you know that there was a problem billing the credit card on file for one of your customers. You can log into your Stripe dashboard or get in touch with the customer to try and resolve the issue.
+
+Customer Email: <%= @subscriber.email %>
+Stripe Charge ID: <%= @charge_id %>
 
 Thanks!

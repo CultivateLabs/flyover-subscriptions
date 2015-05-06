@@ -17,11 +17,11 @@ module FlyoverSubscriptions
     end
 
     describe "failed_charge_notify_admin" do
-      let(:mail) { StripeEventsMailer.failed_charge_notify_admin(double(email: "to@example.org"), "Test App") }
+      let(:mail) { StripeEventsMailer.failed_charge_notify_admin(double(email: "to@example.org"), "Test App", "ch_123") }
 
       it "renders the headers" do
         expect(mail.subject).to eq I18n.t('flyover_subscriptions.stripe_events_mailer.failed_charge_notify_customer.subject')
-        expect(mail.to).to eq(["to@example.org"])
+        expect(mail.to).to eq([FlyoverSubscriptions.notifications_admin_email])
         expect(mail.from).to eq(["noreply@example.com"])
       end
 
