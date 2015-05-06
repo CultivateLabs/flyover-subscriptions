@@ -40,8 +40,9 @@ module FlyoverSubscriptions
   private
     def load_charges
       Stripe.api_key = ENV["STRIPE_SECRET"]
-      @charges = Stripe::Customer.retrieve(@subscription.stripe_customer_token).charges
-      @upcoming_invoices = Stripe::Invoice.upcoming(customer: @subscription.stripe_customer_token)
+      customer = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
+      @charges = customer.charges
+      @upcoming_invoices = customer.upcoming_invoices
     end
 
     def subscription_params
