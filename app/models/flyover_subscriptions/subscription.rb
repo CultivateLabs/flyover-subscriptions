@@ -28,20 +28,16 @@ module FlyoverSubscriptions
       response = stripe_subscription.delete(at_period_end: at_period_end)
       cancel_time = at_period_end ? Time.at(response.current_period_end) : Time.now
       self.update_column("archived_at", cancel_time)
-    rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while canceling subscription: #{e.message}"
-      errors.add :base, "There was a problem canceling your subscription plan."
-      false
+    rescue => e
+      handle_exception(e)
     end
 
     def set_stripe_quantity_to_zero
       stripe_subscription.quantity = 0
       stripe_subscription.save
       self.update_column("archived_at", Time.now)
-    rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while updating subscription: #{e.message}"
-      errors.add :base, "There was a problem updating your subscription."
-      false
+    rescue => e
+      handle_exception(e)
     end
 
     def resubscribe_to_stripe
@@ -53,10 +49,8 @@ module FlyoverSubscriptions
         customer.subscriptions.create(plan: self.plan.stripe_id)
         self.update_column("archived_at", nil)
       end
-    rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while updating subscription: #{e.message}"
-      errors.add :base, "There was a problem updating your subscription."
-      false
+    rescue => e
+      handle_exception(e)
     end
 
     def customer
@@ -66,6 +60,8 @@ module FlyoverSubscriptions
       else
         ::Stripe::Customer.create(description: subscriber.email, email: subscriber.email, plan: plan.stripe_id, card: stripe_card_token)
       end
+    rescue => e
+      handle_exception(e)
     end
 
     def stripe_subscription
@@ -78,10 +74,8 @@ module FlyoverSubscriptions
         self.stripe_customer_token = customer.id
         self.last_four = customer.sources.retrieve(customer.default_source).last4
       end
-    rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while creating subscription: #{e.message}"
-      errors.add :base, "There was a problem with your credit card."
-      false
+    rescue => e
+      handle_exception(e)
     end
 
     def update_stripe_plan
@@ -94,10 +88,31 @@ module FlyoverSubscriptions
       elsif self.plan.present?
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
       end
-    rescue ::Stripe::InvalidRequestError => e
-      logger.error "Stripe error while updating plan: #{e.message}"
-      errors.add :base, "There was a problem updating your subscription plan."
-      false
+    rescue => e
+      handle_exception(e)
+    end
+
+    def handle_exception(e)
+      if e.is_a? Stripe::CardError
+        self.errors.add :base, e.message
+        self.stripe_card_token = nil
+        false
+      elsif e.is_a? Stripe::InvalidRequestError
+        self.errors.add :base, "There was a problem with your credit card."
+        false
+      elsif e.is_a? Stripe::AuthenticationError
+        self.errors.add :base, "There was a problem connecting to Stripe. Please try again."
+        false
+      elsif e.is_a? Stripe::APIConnectionError
+        self.errors.add :base, "There was a problem connecting to Stripe. Please try again."
+        false
+      elsif e.is_a? Stripe::StripeError
+        self.errors.add :base, "There was a problem processing your order. Please try again."
+        false
+      else
+        self.errors.add :base, "There was a problem processing your order. Please try again."
+        false
+      end
     end
   end
 end
