@@ -28,3 +28,7 @@ en:
         subject: "Failed Credit Card Payment"
       invoice_payment_failed_notify_admin:
         subject: "Failed Credit Card Payment"
+      subscription_deleted_notify_customer:
+        subject: "Subscription Deleted"
+      subscription_deleted_notify_admin:
+        subject: "Subscription Deleted"

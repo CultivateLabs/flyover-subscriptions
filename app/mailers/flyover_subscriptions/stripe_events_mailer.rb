@@ -14,10 +14,28 @@ module FlyoverSubscriptions
 
       mail to: @subscriber.email
     end
+
     def invoice_payment_failed_notify_admin(subscriber, app_name, invoice_id)
       @subscriber = subscriber
       @app_name = app_name
       @invoice_id = invoice_id
+
+      mail to: FlyoverSubscriptions.notifications_admin_email
+    end
+
+    def subscription_deleted_notify_customer(subscriber, app_name, signature, greeting="Hi")
+      @subscriber = subscriber
+      @greeting = greeting
+      @app_name = app_name
+      @signature = signature
+
+      mail to: @subscriber.email
+    end
+    
+    def subscription_deleted_notify_admin(subscriber, app_name, subscription_id)
+      @subscriber = subscriber
+      @app_name = app_name
+      @subscription_id = subscription_id
 
       mail to: FlyoverSubscriptions.notifications_admin_email
     end

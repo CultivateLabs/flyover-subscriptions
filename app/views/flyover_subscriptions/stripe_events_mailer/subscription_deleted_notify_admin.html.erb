@@ -1,0 +1,19 @@
+<p>
+  Greetings,
+</p>
+
+<p>
+  We just wanted to let you know that a subscription was cancelled for one of your customers on <%= @app_name %>. You can log into your Stripe dashboard to view details about the customer and their subscription
+</p>
+<p>
+  <strong>Customer Email:</strong>
+  <%= @subscriber.email %>
+</p>
+<p>
+  <strong>Stripe Subscription ID:</strong>
+  <%= @subscription_id %>
+</p>
+
+<p>
+  Thanks!
+</p>
