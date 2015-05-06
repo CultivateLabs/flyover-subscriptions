@@ -42,7 +42,7 @@ module FlyoverSubscriptions
       Stripe.api_key = ENV["STRIPE_SECRET"]
       customer = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
       @charges = customer.charges
-      @upcoming_invoices = customer.upcoming_invoices
+      @upcoming_invoices = customer.upcoming_invoices if customer.subscriptions.total_count > 0
     end
 
     def subscription_params

@@ -70,8 +70,10 @@
           <td class='text-muted'>Payment</td>
           <td>
             <p>Using card **** **** **** <%= @subscription.last_four %></p>
-            <p>Next payment due: <%= date_from_stripe_timestamp(@upcoming_invoices.next_payment_attempt) %></p>
-            <p>Amount: <%= number_to_currency @upcoming_invoices.total / 100 %></p> 
+            <% if @upcoming_invoices %>
+              <p>Next payment due: <%= date_from_stripe_timestamp(@upcoming_invoices.next_payment_attempt) %></p>
+              <p>Amount: <%= number_to_currency @upcoming_invoices.total / 100 %></p> 
+            <% end %>
           </td>
           <td>
             <%= link_to icon("credit-card", "Update Card"), "#update-card", class: "btn btn-xs btn-default pull-right", data: { toggle: "collapse" } %>
