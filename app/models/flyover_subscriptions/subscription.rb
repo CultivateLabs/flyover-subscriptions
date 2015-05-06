@@ -5,7 +5,7 @@ module FlyoverSubscriptions
     belongs_to :subscriber, polymorphic: true
     belongs_to :plan
 
-    validates_associated :subscriber
+    # validates_associated :subscriber
 
     before_create :create_stripe_subscription
     before_update :update_stripe_plan
@@ -70,9 +70,14 @@ module FlyoverSubscriptions
 
   private
     def create_stripe_subscription
-      if valid?
-        self.stripe_customer_token = customer.id
-        self.last_four = customer.sources.retrieve(customer.default_source).last4
+      if !errors.any?
+        stripe_customer = customer
+        if !errors.any?
+          self.stripe_customer_token = stripe_customer.id
+          self.last_four = stripe_customer.sources.retrieve(stripe_customer.default_source).last4
+        else
+          false
+        end
       end
     rescue => e
       handle_exception(e)
