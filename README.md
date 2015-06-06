@@ -6,7 +6,7 @@
 You must set `ENV["STRIPE_SECRET"]` and `ENV["STRIPE_PUBLIC_KEY"]` with your API Secret and Publishable Keys so the gem can communicate with Stripe
 
 ### Models
-FlyoverSubscriptions has two models, Subscription and Plan. You can run `rake db:migrate` to install the migrations. A subscription needs to belong to a subscriber, which is a model in your host app. To designate a model as a subscriber (maybe a User, Company, or Site) just add `acts_as_subscriber` to the model
+FlyoverSubscriptions has two models, Subscription and Plan. You can run `rake db:migrate` to install the migrations. A subscription needs to belong to a subscriber, which is a model in your host app. To designate a model as a subscriber (maybe a User, Company, or Site) just add `acts_as_subscriber` to the model and make sure it has an `email` attribute (or delegates the method to another associated model)
 
 ```
 class User
