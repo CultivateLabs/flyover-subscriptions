@@ -2,7 +2,7 @@ module FlyoverSubscriptions
   class Subscription < ActiveRecord::Base
     attr_accessor :stripe_card_token
     
-    belongs_to :subscriber, polymorphic: true
+    belongs_to :subscriber, polymorphic: true, touch: true
     belongs_to :plan
 
     # validates_associated :subscriber
