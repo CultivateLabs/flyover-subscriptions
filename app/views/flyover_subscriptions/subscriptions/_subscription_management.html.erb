@@ -61,7 +61,7 @@
           <tr>
             <%= simple_form_for @subscription do |f| %>
               <td class='text-muted'>Plan</td>
-              <td><%= f.association :plan, label: false %></td>
+              <td><%= f.association :plan, label: false, include_blank: false %></td>
               <td><%= f.submit "Update Plan", class: "btn btn-default btn-xs pull-right" %></td>
             <% end %>
           </tr>

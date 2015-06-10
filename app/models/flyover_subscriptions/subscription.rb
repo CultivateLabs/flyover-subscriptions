@@ -6,6 +6,7 @@ module FlyoverSubscriptions
     belongs_to :plan
 
     # validates_associated :subscriber
+    validates_presence_of :plan
 
     before_create :create_stripe_subscription
     before_update :update_stripe_plan
