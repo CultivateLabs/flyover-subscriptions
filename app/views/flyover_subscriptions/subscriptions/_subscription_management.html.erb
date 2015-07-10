@@ -127,7 +127,7 @@
           <% @charges.each do |charge| %>
             <tr>
               <td>
-                <% if charge.status == "succeeded" %>
+                <% if ["succeeded", "paid"].include?(charge.status) %>
                   <i class="fa fa-check text-success"></i>
                 <% else %>
                   <i class="fa fa-exclamation-triangle text-danger"></i>
