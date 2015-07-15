@@ -92,6 +92,10 @@ module FlyoverSubscriptions
       elsif self.archived? || self.will_cancel?
         resubscribe_to_stripe
       elsif self.plan.present?
+        if subscriber.respond_to?(:can_update_subscription_to_plan?) && !subscriber.can_update_subscription_to_plan?(self, plan)
+          return false 
+        end
+        
         customer.update_subscription(plan: self.plan.stripe_id, prorate: true)
       end
     rescue => e
